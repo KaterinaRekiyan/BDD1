@@ -14,13 +14,12 @@ public class DashboardPage {
     private SelenideElement heading = $("[data-test-id=dashboard]");
     private ElementsCollection cards = $$(".list__item div");
 
-    public void DashboardPage() {
+    public DashboardPage() {
         heading.shouldBe(visible);
     }
 
     public int getCardBalance(DataHelper.CardInfo cardInfo) {
-        String text;
-        text = cards.findBy(text(cardInfo.getCardNumber().substring(15))).getText();
+        var text= cards.findBy(attribute("data-test-id", cardInfo.getTestId())).getText();
         return extractBalance(text);
     }
 
